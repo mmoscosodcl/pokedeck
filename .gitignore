@@ -1,3 +1,10 @@
+#Directories
+android/
+linux/
+macos/
+web/
+windows/
+
 # Miscellaneous
 *.class
 *.log
