@@ -44,4 +44,22 @@ class CardService {
     }
   }
 
+  Future<List<dynamic>> getCardsRamdomly() async {
+    final url = Uri.parse("https://api.tcgdex.net/v2/en/cards?pagination:page=3&pagination:itemsPerPage=10");
+    log('Fetching cards from URL: $url');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      log('Response body: ${response.body}');
+      final decodedResponse = json.decode(response.body) as List<dynamic>;
+      // Exclude the items that not has content in image
+      decodedResponse.removeWhere((card) => card['image'] == null || card['image'].isEmpty);
+      log('Filtered response: $decodedResponse');
+      return decodedResponse;
+    } else {
+      throw Exception('Failed to load cards by series');
+    }
+  }
+
+
 }

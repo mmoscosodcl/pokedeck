@@ -7,10 +7,12 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  connectivity_plus: ^6.1.4
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
   flutter_tts: ^4.2.3
+  google_fonts: ^6.2.1
   http: ^1.4.0
 
 dev_dependencies:

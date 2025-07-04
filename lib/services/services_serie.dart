@@ -44,4 +44,25 @@ class SerieService {
     }
   }
 
+  Future<List<dynamic>> getSeriesRandom() async {
+    final baseUrl = "${Configuration.apiSeriesUrl}logo=notnull:&pagination:page=2&pagination:itemsPerPage=5";
+    final url = Uri.parse(baseUrl);
+    log('Fetching all serie from URL: $url');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      log('Response body: ${response.body}');
+      //Exclude the items that has name "Unown" from response.body
+      final decodedResponse = json.decode(response.body) as List<dynamic>;
+      final filteredResponse = decodedResponse.where((card) => card['name'] != 'Unown').toList();
+      // Exclude the items that not has content in image
+      //filteredResponse.removeWhere((card) => card['image'] == null || card['image'].isEmpty);
+      log('Filtered response: $filteredResponse');
+      // Return the filtered response
+      return filteredResponse;
+    } else {
+      throw Exception('Failed to load series information');
+    }
+  }
+
 }

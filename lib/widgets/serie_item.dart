@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pokedeck/widgets/serie_detail.dart';
 
 class SerieItemWidget extends StatefulWidget {
   final String id;
@@ -26,6 +27,15 @@ class _SerieItemWidgetState extends State<SerieItemWidget> {
     return GestureDetector(
       onTap: (){
         log('Tapped on Serie: ${widget.name}');
+        Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => SerieDetailScreen(
+              id: widget.id,
+              name: widget.name,
+              imageUrl: widget.logo // Assuming logo is the image URL
+            ),
+          ),
+        );
       },
       child: Card(
         elevation: 8,

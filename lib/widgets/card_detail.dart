@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:pokedeck/screens/card_flip_screen.dart';
 import 'package:pokedeck/services/services_card.dart';
 import 'dart:developer';
 
@@ -160,6 +161,23 @@ Widget build(BuildContext context) {
                                 icon: Icon(Icons.volume_up, color: Colors.blue),
                                 onPressed: () {
                                   speak(cardDetails['name'] ?? 'Unknown');
+                                },
+                              ),
+                              //FLipped icon
+                              IconButton(
+                                icon: Icon(Icons.flip, color: Colors.blue),
+                                onPressed: () { 
+                                  // Implement flip functionality if needed
+                                  // For now, just log the action
+                                  log('Flip icon pressed');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CardFlipper(
+                                        imageUrl: '${cardDetails['image']}/high.png'
+                                      ),
+                                    ),
+                                  );
                                 },
                               ),
                             ],

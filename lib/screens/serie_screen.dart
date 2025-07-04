@@ -50,24 +50,28 @@ class _SerieScreenState extends State<SerieScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            Text(
-              'Pokedeck Series',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 4), // Add some space between title and search field
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search by name...',
-                border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.blueGrey),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0), // Set the height of the AppBar
+        child: AppBar(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Pokedeck Series',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              style: TextStyle(color: Colors.black87),
-              onChanged: filterSeries, // Update the filtered list on text change
-            ),
-          ],
+              SizedBox(height: 4), // Add some space between title and search field
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search by name...',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.blueGrey),
+                ),
+                style: TextStyle(color: Colors.black87),
+                onChanged: filterSeries, // Update the filtered list on text change
+              ),
+            ],
+          ),
         ),
       ),
       body: FutureBuilder<List<dynamic>>(
@@ -78,7 +82,6 @@ class _SerieScreenState extends State<SerieScreen> {
           } else if (snapshot.hasError) {
         return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
-        final serieData = snapshot.data!;
         return ListView.builder(
           itemCount: filteredSeries.length,
           itemBuilder: (context, index) {
